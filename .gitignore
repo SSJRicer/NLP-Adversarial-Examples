@@ -1,0 +1,6 @@
+# IDE
+.vscode/
+__pycache__/
+
+# Test notebooks
+test_zone*
