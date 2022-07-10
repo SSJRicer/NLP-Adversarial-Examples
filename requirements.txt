@@ -1,0 +1,8 @@
+ipython==8.0.1          # Notebook
+ipykernel==6.15.1       # Notebook
+pandas==1.4.0           # Data handling
+matplotlib==3.5.1       # Graph plots
+nltk==3.7               # Text pre-processing
+scikit-learn==1.0.2     # Text feature transformation + models
+tensorflow-gpu>=2.6.0   # Text feature transformation + models
+datasets>=1.15.0        # HuggingFace datasets

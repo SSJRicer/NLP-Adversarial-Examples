@@ -4,68 +4,68 @@
 This project aims to fool sentiment analysis classifiers using adversarial examples.
 
 ## Requirements
-* Any Conda package & environment manager
-    * NOTE: It might be possible to use only `pip`, but we have not tested.
+* Any `conda` or `pip` package & environment manager
 * python >= 3.9
 * Any jupyter package (such as `ipython`)
+* ipykernel = 6.15.1
 * pandas = 1.4.0
 * nltk = 3.7
 * scikit-learn = 1.0.2
-* tensorflow = 2.6.0 (preferably tensorflow-gpu)
-* datasets = 1.15.0 (HuggingFace datasets)
+* tensorflow >= 2.6.0 (preferably tensorflow-gpu)
+* datasets >= 1.15.0 (HuggingFace datasets)
 
 ## Installation
 
 ### <ins>Local machine</ins>
-First, install conda using one of the following options:
-* [Anaconda](https://www.anaconda.com/) (Large)
-* [Miniconda](https://docs.conda.io/en/latest/miniconda.html) (Small)
-* [Miniforge](https://github.com/conda-forge/miniforge/releases) (Small)
 
-Then, install dependencies using the following command from a terminal:
-```
-conda env create --file environment.yml
-```
+To install using `conda`:
+* First, install conda using one of the following options:
+    * [Anaconda](https://www.anaconda.com/) (Large)
+    * [Miniconda](https://docs.conda.io/en/latest/miniconda.html) (Small)
+    * [Miniforge](https://github.com/conda-forge/miniforge/releases) (Small)
+
+* Then, install dependencies using the following command from a terminal:
+    ```
+    conda env create --file environment.yml
+    ```
+
+To install using `pip`:
+* Install dependencies using the following command:
+    ```
+    pip install --user -r requirements.txt
+    ```
 
 ### <ins>Google Colab</ins>
 - Change runtime type's hardware accelerator from `None` to `GPU` for better performance.
     - Do this before anything, or the project files will be lost on reload.
 
-- Install conda by entering the following commands in a code cell:
+- Upgrade python version to 3.9:
     ```jupyter cell
-    ! wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-    ! bash Miniforge3-Linux-x86_64.sh -b -f -p /usr/local
+    ! apt update -y
+    ! apt install python3.9
 
-    import sys
-    sys.path.append("/usr/local/lib/python3.9/site-packages/")
+    ! update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+    ! update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
+    ! python --version
     ```
 
-- Update conda:
+- Install pip for python 3.9:
     ```jupyter cell
-    ! conda update -n base conda -y
-    ```
-
-- Add the dependencies' channels:
-    ```jupyter cell
-    ! conda config --add channels conda-forge
-    ! conda config --add channels anaconda
+    ! apt install python3.9-distutils
+    ! curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    ! python3.9 get-pip.py
     ```
 
 - Upload the project's files or clone from the [github repository](https://github.com/SSJRicer/NLP-Adversarial-Examples.git) (if you have access).
 
-- Change directory to the project's directory & run the following command to create the environment:
+- Change directory to the project's directory & run the following command to install the dependencies:
     ```jupyter cell
-    ! conda env create -f environment.yml
+    ! pip install --user -r requirements.txt
     ```
 
 - Activate the environment and run the main script using any of the 4 commands listed below:
     ```jupyter cell
-    %%bash
-    source activate nlp
-    conda info --envs
-
-    cd <PROJECT_DIR>
-    python main.py ...
+    ! cd NLP-Adversarial-Examples/; python main.py ...
     ```
 
 
