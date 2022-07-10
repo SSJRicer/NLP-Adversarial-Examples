@@ -14,7 +14,7 @@ import pandas as pd
 import nltk
 
 # NOTE: OMW-1.4 is WordNet
-nltk.download(["stopwords", "punkt", "omw-1.4"])
+nltk.download(["stopwords", "punkt", "omw-1.4", "averaged_perceptron_tagger"])
 
 # Project
 import arguments as nlp_arguments
