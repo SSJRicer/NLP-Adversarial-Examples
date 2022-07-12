@@ -132,7 +132,8 @@ def train(args):
     if model_type == "sklearn":
         data = df["preprocessed_text"]
     elif model_type == "keras":
-        data = df["review"]
+        # data = df["review"]
+        data = df["preprocessed_text"]
 
     # FEATURES
     # Get features configuration parameters

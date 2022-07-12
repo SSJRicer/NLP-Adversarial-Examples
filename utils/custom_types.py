@@ -22,6 +22,7 @@ PathType                        = Union[str, os.PathLike]
 
 # Data
 DataType                        = Union[pd.DataFrame, np.ndarray, Iterable]
+LabelType                       = Union[str, int]
 
 # Models
 ModelType               = Literal["sklearn", "keras"]

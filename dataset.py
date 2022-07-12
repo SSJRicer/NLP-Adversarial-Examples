@@ -37,8 +37,27 @@ def clean_text(text: str, do_lower: bool = True) -> str:
     if do_lower:
         text = text.lower()
 
+    # Remove ANSI (color) sequences
+    text = re.sub(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])", '', text)
+
     # Remove HTML components (namely, '<br />')
-    text = re.sub("<br />", ' ', text)
+    # text = re.sub("<br />", ' ', text)
+    text = re.sub(r"<.*?>", ' ', text)
+
+    # Remove URLs
+    text = re.sub(r"https?://\S+|www\.\S+", ' ', text)
+
+    # Remove Emojis
+    text = re.sub(
+        "["
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+        "]+", ' ', text, flags=re.UNICODE
+    )
 
     # Remove non-alphanumeric characters
     text = re.sub("[^a-zA-Z0-9]", ' ', text)
