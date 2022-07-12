@@ -59,6 +59,6 @@
     },
     "attacker": {
         "pop_size": 20,
-        "max_iters": 20
+        "max_gens": 20
     }
 }
