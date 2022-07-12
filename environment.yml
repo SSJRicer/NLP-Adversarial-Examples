@@ -7,10 +7,12 @@ dependencies:
 - pip=21.2.4            # Package manager
 - ipython=8.0.1         # Notebook
 - pandas=1.4.0          # Data handling
-- matplotlib=3.5.1      # Graph plots
+- matplotlib=3.5.1      # Plotting
+- wordcloud=1.8.2.2     # Data exploration
 - nltk=3.7              # Text pre-processing
 - scikit-learn=1.0.2    # Text feature transformation + models
 - tensorflow-gpu=2.6.0  # Text feature transformation + models
 - pip:
   - ipykernel==6.15.1   # Notebook
   - datasets==1.15.0    # HuggingFace datasets
+  - seaborn==0.11.2     # Plotting

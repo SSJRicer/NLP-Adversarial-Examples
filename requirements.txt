@@ -1,7 +1,9 @@
 ipython==8.0.1          # Notebook
 ipykernel==6.15.1       # Notebook
 pandas==1.4.0           # Data handling
-matplotlib==3.5.1       # Graph plots
+matplotlib==3.5.1       # Plotting
+seaborn==0.11.2         # Plotting
+wordcloud==1.8.2.2      # Data exploration
 nltk==3.7               # Text pre-processing
 scikit-learn==1.0.2     # Text feature transformation + models
 tensorflow-gpu>=2.6.0   # Text feature transformation + models

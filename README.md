@@ -9,10 +9,14 @@ This project aims to fool sentiment analysis classifiers using adversarial examp
 * Any jupyter package (such as `ipython`)
 * ipykernel = 6.15.1
 * pandas = 1.4.0
+* numpy >= 1.21.2
 * nltk = 3.7
 * scikit-learn = 1.0.2
 * tensorflow >= 2.6.0 (preferably tensorflow-gpu)
 * datasets >= 1.15.0 (HuggingFace datasets)
+* matplotlib = 3.5.1 (Data exploration)
+* seaborn = 0.11.2 (Data exploration)
+* wordcloud = 1.8.2.2 (Data exploration)
 
 ## Installation
 
