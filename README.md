@@ -157,6 +157,8 @@ To get information regarding the different options, run the following command:
 python main.py -h
 ```
 
+**IMPORTANT: The first step would be to train the model and create the feature transformer and model files.**
+
 The main script has 4 major functions (each has its own arguments):
 1. Training:
     ```python

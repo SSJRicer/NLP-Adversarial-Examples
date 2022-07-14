@@ -4,12 +4,6 @@ import logging
 # Arguments
 import argparse
 
-# IO
-from pathlib import Path
-
-# Datasets
-import pandas as pd
-
 # Text
 import nltk
 
@@ -18,14 +12,9 @@ nltk.download(["stopwords", "punkt", "wordnet", "omw-1.4", "averaged_perceptron_
 
 # Project
 import arguments as nlp_arguments
-import dataset as nlp_dataset
-import features as nlp_features
-import models as nlp_models
-import evaluate as nlp_evaluate
-import attacks as nlp_attacks
 
 # Utilities
-from utils import log_utils, io_utils, custom_types
+from utils import log_utils
 
 logger = logging.getLogger()
 
