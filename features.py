@@ -39,7 +39,7 @@ def create_and_fit_feature_transform(
     logger.debug(f"Instantiating & fitting feature transformer for '{transformer_by_model_type.lower()}' model...")
 
     if transformer_by_model_type.lower() == "sklearn_bow":
-        feature_transformer = SklearnTfidfVectorizer(*args, **kwargs)
+        feature_transformer = SklearnCountVectorizer(*args, **kwargs)
         feature_transformer.fit(data)
     
     elif transformer_by_model_type.lower() == "sklearn_tfidf":

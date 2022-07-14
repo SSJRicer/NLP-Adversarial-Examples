@@ -16,3 +16,4 @@ dependencies:
   - ipykernel==6.15.1   # Notebook
   - datasets==1.15.0    # HuggingFace datasets
   - seaborn==0.11.2     # Plotting
+  - numpy==1.19.5       # Arrays & Matrices

@@ -152,13 +152,13 @@ def train(args):
         if model_type == "sklearn":
             # Set stop words
             stop_words = feature_parameters.get("stop_words", "nltk")
-            feature_parameters["stop_words"] = nlp_dataset.STOPWORDS
+            feature_parameters["stop_words"] = None
             if stop_words == "nltk":
-                feature_parameters["stop_words"] = nlp_dataset.STOPWORDS
+                feature_parameters["stop_words"] = [w for w in nlp_dataset.STOPWORDS if w not in ["no", "not", "nor"]]
             elif stop_words == "sklearn":
                 feature_parameters["stop_words"] = sklearn.feature_extraction.text.ENGLISH_STOP_WORDS
             else:
-                logger.warning(f"Unsupported library given: '{stop_words}'. Supporting only: 'nltk' and 'sklearn'. Defaulting to 'nltk'...")
+                logger.warning(f"Unsupported library given: '{stop_words}'. Supporting only: 'nltk' and 'sklearn'. Defaulting to None...")
         
         # Create & fit transformer
         feature_transformer = nlp_features.create_and_fit_feature_transform(
@@ -199,7 +199,7 @@ def train(args):
     # Get model build configuration parameters
     model_build_parameters = model_parameters.get("build", {})
     if model_type == "keras":
-        model_build_parameters["embedding_input_dim"] = len(feature_transformer.word_index)
+        model_build_parameters["embedding_input_dim"] = len(feature_transformer.word_index) + 1
 
     # Build model
     model = nlp_models.build_model(model_type=model_type, **model_build_parameters)

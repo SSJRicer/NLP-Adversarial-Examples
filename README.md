@@ -9,7 +9,7 @@ This project aims to fool sentiment analysis classifiers using adversarial examp
 * Any jupyter package (such as `ipython`)
 * ipykernel = 6.15.1
 * pandas = 1.4.0
-* numpy >= 1.21.2
+* numpy == 1.19.5
 * nltk = 3.7
 * scikit-learn = 1.0.2
 * tensorflow >= 2.6.0 (preferably tensorflow-gpu)
