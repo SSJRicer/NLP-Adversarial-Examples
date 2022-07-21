@@ -18,6 +18,7 @@ import features as nlp_features
 
 # Models
 import sklearn.linear_model
+from sklearn.model_selection import GridSearchCV
 import models as nlp_models
 import tensorflow.keras.callbacks
 
@@ -47,7 +48,24 @@ def train_sklearn_model(
     ):
     """ Trains a Logistic Regression model. """
 
-    model.fit(X_train, y_train)
+    if "gridsearch" in kwargs:
+        grid_params = kwargs["gridsearch"]
+        logger.info(f"Performing grid search with parameters: {grid_params}...")
+
+        grid = GridSearchCV(
+            sklearn.linear_model.LogisticRegression(),
+            param_grid    = grid_params,
+            cv            = 5,
+        )
+        grid.fit(X_train, y_train)
+
+        model = grid.best_estimator_
+
+        logger.info(f"Best cross-validation score: {grid.best_score_:.2f}")
+        logger.info(f"Best parameters: {grid.best_params_}")
+        logger.info(f"Best estimator: {model}")
+    else:
+        model.fit(X_train, y_train)
 
     if save_path is not None:
         test_accuracy = model.score(X_test, y_test)
@@ -132,8 +150,8 @@ def train(args):
     if model_type == "sklearn":
         data = df["preprocessed_text"]
     elif model_type == "keras":
-        # data = df["review"]
-        data = df["preprocessed_text"]
+        data = df["review"]
+        # data = df["preprocessed_text"]
 
     # FEATURES
     # Get features configuration parameters
@@ -262,36 +280,18 @@ def train(args):
         if model_type == "keras":
             evaluation_parameters["batch_size"] = model_train_parameters.get("batch_size", 256)
 
-        logger.info("Running evaluation on test data...")
-        accuracy = nlp_evaluate.evaluation_by_model_type(
+        logger.info("Running evaluation on TRAIN data...")
+        train_accuracy = nlp_evaluate.evaluation_by_model_type(
+            model_type    = model_type,
+            model         = model,
+            data          = X_train,
+            data_gt       = y_train
+        )
+
+        logger.info("Running evaluation on TEST data...")
+        test_accuracy = nlp_evaluate.evaluation_by_model_type(
             model_type    = model_type,
             model         = model,
             data          = X_test,
             data_gt       = y_test
         )
-
-
-# def add_augmenting_features(df: pd.DataFrame, do_scale: bool = True):
-#     """ TODO """
-
-#     try:
-#         tokened_reviews = df.Tokened
-#     except:
-#         tokened_reviews = [word_tokenize(text) for text in df["Text"]]
-
-#     # Create feature that measures length of reviews
-#     len_tokens = []
-#     for i in range(len(tokened_reviews)):
-#         len_tokens.append(len(tokened_reviews[i]))
-
-#     # Create average word length (training)
-#     average_words = [len(x) / (len(x.split())) for x in df["Text"]]
-
-#     if do_scale:
-#         len_tokens    = preprocessing.scale(len_tokens)
-#         average_words = preprocessing.scale(average_words)
-    
-#     df.insert(0, column="Lengths", value=len_tokens)
-#     df["averageWords"] = average_words
-
-#     return df

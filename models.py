@@ -7,6 +7,9 @@ from utils import custom_types
 from utils.custom_types import ModelType, PathType, SklearnFeatureTransformerType, KerasTokenizer
 from tensorflow.keras.models import Sequential
 
+# Text
+import re
+
 # Datasets
 import numpy as np
 import dataset as nlp_dataset
@@ -219,6 +222,10 @@ class LSTMSentimentClassifier(CustomClassifier):
         batch_probs = []
 
         # Pre-process
+        # Remove ANSI (color) sequences
+        input_batch           = [re.sub(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])", '', text) for text in input_batch]
+
+        # Transform features
         input_word_freq_seq   = self.feature_transformer.texts_to_sequences(input_batch)
         model_inp             = keras.preprocessing.sequence.pad_sequences(input_word_freq_seq, maxlen=self.max_seq_len)
 

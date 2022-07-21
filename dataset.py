@@ -62,7 +62,7 @@ def clean_text(text: str, do_lower: bool = True) -> str:
     # Remove non-alphanumeric characters
     text = re.sub("[^a-zA-Z0-9]", ' ', text)
 
-    # Remove whitespaces
+    # Remove multiple whitespaces
     text = " ".join(text.split())
 
     return text
